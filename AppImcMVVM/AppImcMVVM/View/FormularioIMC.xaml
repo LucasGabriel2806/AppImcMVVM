@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppImcMVVM.View.FormularioIMC">
+    <ContentPage.Content>
+
+        <StackLayout Padding="5"
+                     Orientation="Vertical"
+                     BackgroundColor="#999">
+
+
+            <Label Text="CALCULE SEU INDICE DE MASSA CORPORAL"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+
+
+            <StackLayout BackgroundColor="#EEE" Padding="10">
+
+                <Label Text="QUAL É SUA ALTURA?"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" />
+
+                <!--
+                Preciso Referenciar as propriedades da classe ViewModel
+                no Binding na minha View. Estou fazendo isso pra pegar 
+                os dados que o usuário digitar por Binding.Esse entry
+                ta vinculado la na minha viewModel pela propriedade
+                Altura. Por isso declaro o método set e get-->
+                <Entry Text="{Binding Altura}"
+                       Keyboard="Text"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Red"
+                       FontAttributes="Bold" />
+
+                <Label Text="QUAL É SEU PESO?"
+                       FontAttributes="Bold"                             
+                       HorizontalTextAlignment="Center" />
+
+
+
+                <Entry Text="{Binding Peso}"
+                       Keyboard="Text"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Red"
+                       FontAttributes="Bold" />
+
+                <!--
+                Invés de eu chamar o Clicked, eu chamo o Command, Através 
+                de Binding, eu referncio a propriedade que faz o cálculo.
+                Toda vez que eu clicar no botão ele vai chamar esse atributo
+                Command que vai lá na ViewModel por Binding Invocar essa propriedade,
+                retornando a execução do comando.
+                A natureza do Command é um diferente do Clicked, ele funciona de uma
+                maneira diferente.
+                -->
+                <Button Text="Calcular" Command="{Binding CalcularIMCCommand}"/>
+
+                <Label Text="{Binding Resultado}"
+                       HorizontalOptions="Center"
+                       FontSize="Large"
+                       FontAttributes="Bold" />
+
+                <Label Text="VALORES DE REFERÊNCIA"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"
+                       Margin="5" />
+
+
+                <TableView>
+                    <TableRoot>
+                        <TableSection>
+                            <TextCell TextColor="#000" Text="Entre 17 e 18,49 = Abaixo do peso"></TextCell>
+                            <TextCell TextColor="#000" Text="Entre 18,5 e 24,99 = Peso normal"></TextCell>
+                            <TextCell TextColor="#000" Text="Entre 25 e 29,99 = Acima do peso"></TextCell>
+                            <TextCell TextColor="#000" Text="Entre 30 e 34,99 = Obesidade I"></TextCell>
+                            <TextCell TextColor="#000" Text="Entre 35 e 39,99 = Obesidade II(severa)"></TextCell>
+                            <TextCell TextColor="#000" Text="Acima de 40 = Obesidade III(mórbida)"></TextCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            </StackLayout>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>
